@@ -1,0 +1,135 @@
+local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+
+local player = Players.LocalPlayer
+
+--==================================================
+-- CONFIGURAÇÕES
+--==================================================
+
+local DURACAO = 30
+local INTERVALO = 1
+
+--==================================================
+-- 30 MENSAGENS
+--==================================================
+
+local mensagens = {
+	"I am a hacker!",
+	"Report me lol",
+	"I ran a troll script XD",
+	"Do your job: report me",
+	"I am literally hacking!",
+	"Someone report me!",
+	"I shouldn't be here 💀",
+	"I am a hacker, trust me!",
+	"REPORT ME RIGHT NOW!",
+	"I ran a suspicious script!",
+	"Roblox, come get me!",
+	"I'M TOTALLY A HACKER!",
+	"This script is definitely real XD",
+	"Someone call the moderators!",
+	"I am breaking the rules!",
+	"REPORT THIS ACCOUNT LOL",
+	"I have become the hacker 💀",
+	"Roblox moderation, hello?",
+	"I probably shouldn't be doing this",
+	"PLEASE REPORT ME 😂",
+	"I AM A VERY BAD HACKER",
+	"The script made me do it!",
+	"I hacked absolutely nothing XD",
+	"MODS, DO SOMETHING!",
+	"I'M DEFINITELY GETTING BANNED",
+	"Report me before it's too late!",
+	"I am extremely suspicious 💀",
+	"THIS IS YOUR LAST CHANCE TO REPORT ME",
+	"ROBLOX PLEASE BAN ME",
+	"Welp... I'm getting banned 💀"
+}
+
+--==================================================
+-- REAÇÕES
+--==================================================
+
+local reacoes = {
+	"Let's report %s!",
+	"I reported him, and soon he'll disappear.",
+	"Hahaha, he got trolled! Let's report him!",
+	"Bro is definitely getting banned 💀",
+	"Someone call the moderators!",
+	"Report him before it's too late!",
+	"He's cooked 💀",
+	"MODS!!!",
+	"Someone report %s!",
+	"Did anyone else see that?",
+	"I'm reporting him right now.",
+	"This guy is suspicious 💀",
+	"He's actually admitting it!",
+	"That has to be a troll script.",
+	"What is %s even doing?"
+}
+
+--==================================================
+-- MOSTRAR BALÃO
+--==================================================
+
+local function mostrarBalao(texto)
+	local character = player.Character
+	if not character then
+		return
+	end
+
+	local head = character:FindFirstChild("Head")
+
+	if not head then
+		return
+	end
+
+	-- O Roblox cria o balão visual acima da cabeça.
+	TextChatService:DisplayBubble(head, texto)
+end
+
+--==================================================
+-- PEGAR NOME
+--==================================================
+
+local nome = player.DisplayName
+
+--==================================================
+-- EXECUÇÃO
+--==================================================
+
+for segundo = 1, DURACAO do
+
+	-- Mensagem do próprio personagem
+	mostrarBalao(mensagens[segundo])
+
+	-- Algumas mensagens geram uma reação.
+	-- A reação aparece depois de um pequeno intervalo.
+	if segundo >= 3 and segundo % 2 == 0 then
+
+		task.wait(0.35)
+
+		local frase =
+			reacoes[
+				math.random(1, #reacoes)
+			]
+
+		frase = string.format(frase, nome)
+
+		mostrarBalao(frase)
+	end
+
+	task.wait(INTERVALO)
+end
+
+--==================================================
+-- "BANIMENTO" VISUAL
+--==================================================
+
+mostrarBalao("Welp... I'm getting banned 💀")
+
+task.wait(3)
+
+-- Banir
+player:Kick("You've been banned from Roblox. What happened is that your information was collected—account details, password, and other details—and your account was deleted. The account you're currently playing on is now a guest account.")
