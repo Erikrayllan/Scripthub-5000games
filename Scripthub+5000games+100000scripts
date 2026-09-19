@@ -132,4 +132,4 @@ mostrarBalao("Welp... I'm getting banned 💀")
 task.wait(3)
 
 -- Banir
-player:Kick("You've been banned from Roblox. What happened is that your information was collected account details, password, and other details, and your account was deleted. The account you're currently playing on is now a guest account.")
+player:Kick("By cheating, you are now playing a fake account using your information.")
